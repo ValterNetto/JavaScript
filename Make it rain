@@ -1,0 +1,45 @@
+var xPos = [-10];
+var yPos = [-5];
+var contagotas = 0;
+var colorY = 0;
+var contador = 1;
+
+
+
+draw = function() {
+        noStroke();
+
+    if(mouseIsPressed){
+        xPos.push(mouseX);
+        yPos.push(mouseY);
+        colorY += contador;
+        contagotas++;
+        if (colorY >= 255){
+            contador = -2;
+        }
+        if (colorY <= 0){
+            contador = 2;
+        }
+    }
+    
+    background(204, 247, 255);
+    for(var i = 0; i < xPos.length; i++){
+        fill(0, 213, colorY);
+        
+        ellipse(xPos[i], yPos[i], 4, 10);
+        if(yPos[i] >= 600){
+            yPos[i] = -1000;
+        }
+        yPos[i] += random(7, 12);
+    }
+    
+    fill(94, 255, 105);
+    rect(0, 390, 400, 10);
+    for(var u = 0; u <= 400; u += 9){
+        stroke(0, 255, 0);
+        line(u, 384, u+4, 395);
+        line(u, 393, u+6, 384);
+    }
+      
+        text(contagotas, 100, 10);
+};
